@@ -1,0 +1,581 @@
+#:kivy 2.3.0
+
+WindowManager:
+    MainWindow:
+        name:"main"
+    SecondWindow:
+        name:"second"
+
+<CustomLabel@Label>:
+    id: None
+    font_size: 20
+    halign: "center"
+    valign: "center"
+
+    markup: True
+
+    background_normal: ""
+    background_color: (0,0,0,0)
+
+    border_buff: 0
+    border_color: (1,1,1,0)
+
+    bg_color: (0.5,0.2,0.5,1)
+
+    foreground_color: 1, 1, 1, 1  
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    corner_roundness: 0.25
+    individual_corners: False
+    corners: [0,0,0,0]
+
+    shadow_offset_x: 0
+    shadow_offset_y: 0
+
+    shadow_blur_radius: 0
+    shadow_spread_x: 0
+    shadow_spread_y: 0
+
+    shadow_color: (0,0,0)
+    shadow_opacity: 0
+
+    canvas.before:
+        Color: 
+            rgba: (*self.shadow_color, self.shadow_opacity)
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: -self.width*self.shadow_offset_x, -self.width*self.shadow_offset_y
+            blur_radius: self.shadow_blur_radius
+            spread_radius: -self.width*self.shadow_spread_x,-self.width*0.01*self.shadow_spread_x
+            border_radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+
+        Color: 
+            rgba: self.border_color
+        SmoothRoundedRectangle: 
+            pos: self.pos
+            size: self.size
+            radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+        Color: 
+            rgba: self.bg_color
+        SmoothRoundedRectangle:
+            pos: [i+self.height*self.border_buff for i in self.pos]
+            size: [i-self.height*self.border_buff*2 for i in self.size]
+            radius: [(self.height/2)*self.corner_roundness - self.height*self.border_buff for i in range(4)] if not self.individual_corners else [(self.height/2)*i - self.height*self.border_buff for i in self.corners]
+
+<TextInput>:
+    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    halign: "center"
+
+<RoundedTextInput@TextInput>:
+    id: None
+    font_size: min(self.width/4, self.height/2)
+
+    markup: True
+
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    background_active: ''
+    background_normal: ""
+    background_color: (0,0,0,0)
+
+    foreground_color: (0,0,0,1)
+    cursor_color: (0,0,0,1)
+
+    bg_color: (0,0,0,1)
+    cursor_color: (0,0,0,1)
+
+    hint_text: "??"
+    hint_text_color: (0,0,0,.3)
+
+    border_buff: 0
+    border_color: (1,1,1,1)
+    corner_roundness: 0.25
+    individual_corners: False
+    corners: [0,0,0,0]
+
+    shadow_offset_x: 0
+    shadow_offset_y: 0
+
+    shadow_blur_radius: 0
+    shadow_spread_x: 0
+    shadow_spread_y: 0
+
+    disabled_foreground_color: (1,0,0,1)
+
+    shadow_color: (0,0,0)
+    shadow_opacity: 0
+
+    canvas.before:
+        Color: 
+            rgba: (*self.shadow_color, self.shadow_opacity)
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: -self.width*self.shadow_offset_x, -self.width*self.shadow_offset_y
+            blur_radius: self.shadow_blur_radius
+            spread_radius: -self.width*self.shadow_spread_x,-self.width*0.01*self.shadow_spread_x
+            border_radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+
+        Color: 
+            rgba: self.border_color
+        SmoothRoundedRectangle: 
+            pos: self.pos
+            size: self.size
+            radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+        Color: 
+            rgba: self.bg_color
+        SmoothRoundedRectangle:
+            pos: [i+self.height*self.border_buff for i in self.pos]
+            size: [i-self.height*self.border_buff*2 for i in self.size]
+            radius: [(self.height/2)*self.corner_roundness - self.height*self.border_buff for i in range(4)] if not self.individual_corners else [(self.height/2)*i - self.height*self.border_buff for i in self.corners]
+            
+        Color:
+            rgba:(self.cursor_color if self.focus and not self._cursor_blink and int(self.x + self.padding[0]) <= self._cursor_visual_pos[0] <= int(self.x + self.width - self.padding[2]) else (0, 0, 0, 0))
+        Rectangle:
+            pos: self._cursor_visual_pos
+            size: root.cursor_width, -self._cursor_visual_height
+        Color:
+            rgba: self.disabled_foreground_color if self.disabled else (self.hint_text_color if not self.text else self.foreground_color)
+
+<Button>:
+    background_normal: ""
+
+<RoundedButton@Button>:
+    id: None
+    font_size: min(self.width/4, self.height/2)
+    markup: True
+    background_normal: ""
+    background_color: (0,0,0,0)
+
+    default_color: (0,0,0,1)
+    button_color: self.default_color if self.default_color else (0, 0, 0, 1)
+    press_shade: (0.25,0.25,0.25,1)
+
+    border_buff: 0
+    border_color: (1,1,1,0)
+
+    hint_text_color: 1, 1, 1, 0.7 
+    foreground_color: 1, 1, 1, 1  
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    corner_roundness: 0.25
+    individual_corners: False
+    corners: [0,0,0,0]
+
+    shadow_offset_x: 0
+    shadow_offset_y: 0
+
+    shadow_blur_radius: 0
+    shadow_spread_x: 0
+    shadow_spread_y: 0
+
+    shadow_color: (0,0,0)
+    shadow_opacity: 0
+
+    canvas.before:
+        Color: 
+            rgba: (*self.shadow_color, self.shadow_opacity)
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: -self.width*self.shadow_offset_x, -self.width*self.shadow_offset_y
+            blur_radius: self.shadow_blur_radius
+            spread_radius: -self.width*self.shadow_spread_x,-self.width*0.01*self.shadow_spread_x
+            border_radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+
+        Color: 
+            rgba: self.border_color
+        SmoothRoundedRectangle: 
+            pos: self.pos
+            size: self.size
+            radius: [(self.height/2)*self.corner_roundness for i in range(4)] if not self.individual_corners else [(self.height/2)*i for i in self.corners]
+
+        Color: 
+            rgba: self.button_color
+        SmoothRoundedRectangle:
+            pos: [i+self.height*self.border_buff for i in self.pos]
+            size: [i-self.height*self.border_buff*2 for i in self.size]
+            radius: [(self.height/2)*self.corner_roundness - self.height*self.border_buff for i in range(4)] if not self.individual_corners else [(self.height/2)*i - self.height*self.border_buff for i in self.corners]
+
+<EventHolder@InputContainers>:
+    id:None
+    size_hint_y: None
+    size_hint_x: 2
+    q_number: None
+    button_text: "[b]Slet[/b]"
+    label_text: "event"
+    label_font_size: self.height/8
+
+    height: self.width*0.15
+    spacing: self.width*0.04
+
+    padding: [self.width*0.012, 0, 0, 0]
+    InputContainers:
+        orientation: 'horizontal'
+        bg_color: (66/255, 116/255, 150/255,1)
+        spacing: self.width*0.009
+        padding: self.width*0.01
+        CustomLabel:
+            multiline: True
+            font_size: root.label_font_size
+            text: root.label_text
+            bg_color: (46/255, 86/255, 112/255, 1)
+            individual_corners: True
+            size_hint: 0.8, 1
+            corners: .2, .05, .05, .2
+
+        RoundedButton:
+            text: root.button_text
+            default_color: (150/255, 27/255, 46/255,1)
+            individual_corners: True
+            corners: .05, .2, .2, .05
+            size_hint:0.2,1
+            on_release: root.delete_me(root.q_number)
+
+# <PopupContent@Widget>:
+#     message: ""
+#     button_text: "Luk"
+#     BoxLayout: 
+#         orientation: 'vertical'
+#         CustomLabel:
+#             text: root.message
+#         RoundedButton:
+#             text: root.button_text
+
+<BoxPick_pop@Popup>:
+        
+
+<Empty_object@CustomLabel>:
+    height: 200
+    size_hint_y: None
+
+    color: (1,1,1,1)
+    
+    font_size: self.width*0.1
+
+    border_buff: 0.1
+    border_color: (143/255, 4/255, 71/255, 1)
+
+    bg_color: (189/255, 6/255, 94/255, 1)
+
+    foreground_color: 1, 1, 1, 1  
+
+    corner_roundness: 0.25
+
+    text: "[b]Ingen Events[/b]"
+    
+<Scroller@InputContainers>:
+    size_hint_y: None
+    orientation: 'vertical'
+    height: self.minimum_height  
+
+<Pop_msg>:
+    text: "test"
+    font_size: self.width/20
+
+<MainGrid@BoxLayout>:
+    orientation: 'vertical'
+    padding: self.width*0.04
+    spacing: self.width*0.01
+    canvas.before:
+        Color: 
+            rgba: (151/255, 177/255, 199/255, 1)
+        Rectangle: 
+            pos: self.pos
+            size: self.size
+
+<InputContainers@BoxLayout>:
+    orientation:"vertical"
+
+    border_buff: 0
+
+    corner_roundness: 0.25
+    individual_corners: False
+    static_corners: False
+    corner: 0
+    corners: [0,0,0,0]
+
+    shadow_blur_radius: 25
+    shadow_offset_x: 0
+    shadow_offset_y: 0
+    shadow_spread_x: 0
+    shadow_spread_y: 0
+
+    shadow_color: (0,0,0)
+    shadow_opacity: 0
+    bg_color: (0,0,0,0)
+    border_color: (0,0,0,0)
+
+    canvas:
+        Color: 
+            rgba: (*self.shadow_color, self.shadow_opacity)
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            offset: -self.shadow_offset_x, -self.shadow_offset_y
+            blur_radius: self.shadow_blur_radius
+            spread_radius: -self.shadow_spread_x,-self.shadow_spread_y
+            border_radius:(self.corners if self.static_corners and self.individual_corners else [self.corner for _ in range(4)] if self.static_corners else [(self.height/2)*i for i in self.corners] if self.individual_corners else [(self.height/2)*self.corner_roundness for _ in range(4)])
+
+        Color: 
+            rgba: self.border_color
+        SmoothRoundedRectangle: 
+            pos: self.pos
+            size: self.size
+            radius: (self.corners if self.static_corners and self.individual_corners else [self.corner for _ in range(4)] if self.static_corners else [(self.height/2)*i for i in self.corners] if self.individual_corners else [(self.height/2)*self.corner_roundness for _ in range(4)])
+
+        Color: 
+            rgba: self.bg_color
+        SmoothRoundedRectangle: 
+            pos: [i+self.height*self.border_buff for i in self.pos]
+            size: [i-self.height*self.border_buff*2 for i in self.size]
+            radius:([i-i*self.border_buff for i in self.corners] if self.static_corners and self.individual_corners else [self.corner - self.corner*self.border_buff for _ in range(4)] if self.static_corners else [(self.height/2)*i - self.height*self.border_buff for i in self.corners] if self.individual_corners else [(self.height/2)*self.corner_roundness - self.height*self.border_buff for i in range(4)])
+
+<MainWindow>:
+    hour_hand:hourHand
+    minut_hand:minutHand
+    day:day
+    month:month
+    year:year
+
+    dispenser:dispenser
+
+    package:package
+
+    scroller:event_scroller
+
+    MainGrid:
+        spacing: self.width*0.01
+        RoundedButton:
+            text: "Åben nu"
+            bold: True
+            default_color: (68/255, 145/255, 68/255, 1)
+            border_color: (78,145,78,1)
+            border_buff: 0.015
+            press_shade: [.5,.5,.5,.5]
+            size_hint: (1,0.1)
+            spacing: self.height*0.1
+            on_release: root.instant_release_esp()
+            corner_roundness: 1
+            
+            # shadow_radius: self.width*0.01
+            # shadow_offset_x: 0.01
+            # shadow_offset_y: 0.01
+            # shadow_opacity: 0.3
+            # shadow_spread_x: 0.01
+            # shadow_spread_y: 0.01
+            # shadow_blur_radius: self.width*0.06
+            
+        InputContainers:
+            border_buff: 0.01
+            spacing: self.width*0.02
+            padding: self.width*0.04
+            size_hint: 1, 0.3
+            border_buff: 0.04
+            # shadow_offset_x: self.width*0.021
+            # shadow_offset_y: self.width*0.021
+            # shadow_spread_x: self.width*0.01
+            # shadow_spread_y: self.width*0.01
+            bg_color: (65/255, 90/255, 119/255, 1)
+            border_color: (119/255, 141/255, 169/255, 1)
+        
+
+            BoxLayout: # Border Time/date
+                orientation: 'horizontal'
+                size_hint: 1, 0.333
+                spacing: self.width*0.01
+                
+                InputContainers: #Border Hour/Minute
+                    orientation: 'horizontal'
+                    spacing:self.width*0.01
+                    padding: self.width*0.02
+                    bg_color: (69/255, 123/255, 157/255, 1)
+                    corner_roundness: 1
+
+                    CustomLabel:
+                        font_size: self.width*0.3
+                        bg_color: (22/255, 138/255, 173/255, 1)
+                        corner_roundness: 1
+                        text:"Tid"
+                        bold: True
+               
+
+                    RoundedTextInput:
+                        id: hourHand
+                        bg_color: (.9,.9,1,1)
+                        individual_corners: True
+                        corners: [1,0,0,1]
+                        color: (0,0,0,1)
+                        input_filter: 'int'
+                        input_type: "number"
+                        multiline: False
+                        selection_color: ((0.1,0.5,1,0.5))
+
+                    RoundedTextInput:
+                        id: minutHand
+                        bg_color: (.9,.9,1,1)
+                        individual_corners: True
+                        corners: [0,1,1,0]
+                        color:(0,0,0,1)
+                        input_filter: 'int'
+                        input_type: "number"
+                        multiline: False
+                        background_active: ''
+                        selection_color: ((0.1,0.5,1,0.5))
+
+
+
+                InputContainers: #Date
+                    orientation: "vertical"
+                    bg_color: (0,0,0)
+
+                    BoxLayout:
+                        orientation: "horizontal"
+                        CustomLabel:
+                            bg_color: (22/255, 138/255, 173/255, 1)
+                            font_size: min(self.width/4, self.height/2)
+                            text: "Dag"
+                            bold: True
+                            individual_corners: True
+                            corners: [2,0,0,0]
+
+                        CustomLabel:    
+                            bg_color: (22/255, 138/255, 173/255, 1)    
+                            font_size: min(self.width/4, self.height/2)
+                            text: "Måned"
+                            bold: True
+
+                        CustomLabel:
+                            individual_corners: True
+                            bg_color: (22/255, 138/255, 173/255, 1)
+                            font_size: min(self.width/4, self.height/2)
+                            text: "År"
+                            bold: True
+                            corners: [0,2,0,0]
+
+                    BoxLayout: 
+                        orientation: "horizontal"
+                        RoundedTextInput:
+                            bg_color: (.9,.9,1,1)
+                            border_color: (0,0,0,1)
+                            input_filter: 'int'
+                            input_type: "number"
+                            multiline: False
+                            selection_color: ((0.1,0.5,1,0.5))
+                            
+                            id:day 
+                        RoundedTextInput:
+                            bg_color: (.9,.9,1,1)
+                            border_color: (0,0,0,1)
+                            input_filter: 'int'
+                            input_type: "number"
+                            multiline: False
+                            selection_color: ((0.1,0.5,1,0.5))
+
+                            id:month 
+                        RoundedTextInput:
+                            bg_color: (.9,.9,1,1)
+                            border_color: (0,0,0,1)
+                            input_filter: 'int'
+                            input_type: "number"
+                            multiline: False
+                            selection_color: ((0.1,0.5,1,0.5))
+
+                            id:year 
+
+            InputContainers: # Container
+                bg_color: (0,0,0,0)
+                size_hint:1, 0.25
+                corner_roundness: 1
+                spacing: self.width*0.01
+
+                orientation:"horizontal"
+
+                CustomLabel:
+                    font_size: self.width*0.2
+                    bg_color: (22/255, 138/255, 173/255, 1)
+                    text: "Indhold" 
+                    bold: True
+                    individual_corners: True
+                    corners: [1,0,0,1]
+
+                RoundedTextInput:
+                    id:package
+
+                    multiline: False
+                    individual_corners: True
+                    corners: [0,1,1,0]
+                    hint_text: "????"
+                    
+                    bg_color: (.9,.9,1,1)
+                
+                CustomLabel:
+                    font_size: self.width*0.2
+                    bg_color: (22/255, 138/255, 173/255, 1)
+                    text: "Kasse"
+                    bold: True
+                    individual_corners: True
+                    corners: [1,0,0,1]
+
+                RoundedTextInput:
+                    id:dispenser
+                    individual_corners: True
+                    multiline: False
+                    input_filter: "int"
+                    input_type: "number"
+                    corners: [0,1,1,0]
+                    hint_text: "??"
+                    
+                    bg_color: (.9,.9,1,1)
+
+
+            RoundedButton:
+                size_hint: 1,0.45
+                text:"Tilføj"
+                #default_color: (252/255, 211/255, 3/255,1)
+                default_color: (68/255, 145/255, 68/255, 1)
+                border_color: (1, 1, 1, 1)
+                corner_roundness: 1
+                #border_color: (1,1,1,1)
+                press_shade: [.5,.5,.5,.5]
+                border_buff: 0.02
+                color: (1,1,1,.9)
+                bold: True
+                on_release: 
+                    root.add_event()
+
+        BoxLayout: #EventHolders
+            spacing: self.width*0.02
+            orientation: "vertical"
+                
+            CustomLabel:
+                text:"Events:"
+                border_buff: 0.09
+                corner_roundness: .25
+                bg_color: (56/255, 147/255, 232/255,1)
+                border_color: (70/255, 97/255, 166/255, 1)
+                size_hint: 1, 0.1
+                bold: True
+                color: (1,1,1,1)
+                font_size:min(self.width/4, self.height/2)
+           
+            ScrollView:
+                scroll_type: ['content']
+                do_scroll_x: False
+
+                Scroller:
+                    id: event_scroller
+                    orientation: 'vertical'
+                    spacing: self.width*0.009
+                    bg_color: (119/255, 141/255, 169/255, 1)
+                    border_color: (65/255, 90/255, 119/255, 1)
+                    static_corners: True
+                    corner: self.width*0.05
+                    padding: self.width*0.03     
+                              
