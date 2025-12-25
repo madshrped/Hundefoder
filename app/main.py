@@ -505,9 +505,9 @@ class sketchApp(App):
         main_window.update_EventHolders()
 
 
-# scale = 45
+scale = 45
 if __name__ == "__main__":
     bridge = client.bridge()
     reciver = bridge.reciver(bridge)
-    # Window.size = (9*scale, 20*scale)
+    Window.size = (9 * scale, 20 * scale)
     sketchApp().run()

@@ -1,4 +1,5 @@
 #:kivy 2.3.0
+#:import hex kivy.utils.get_color_from_hex
 
 WindowManager:
     MainWindow:
@@ -218,21 +219,21 @@ WindowManager:
     padding: [self.width*0.012, 0, 0, 0]
     InputContainers:
         orientation: 'horizontal'
-        bg_color: (66/255, 116/255, 150/255,1)
+        bg_color: hex("#458588")
         spacing: self.width*0.009
         padding: self.width*0.01
         CustomLabel:
             multiline: True
             font_size: root.label_font_size
             text: root.label_text
-            bg_color: (46/255, 86/255, 112/255, 1)
+            bg_color: hex("#83a598")
             individual_corners: True
             size_hint: 0.8, 1
             corners: .2, .05, .05, .2
 
         RoundedButton:
             text: root.button_text
-            default_color: (150/255, 27/255, 46/255,1)
+            default_color: hex("#cc241d")
             individual_corners: True
             corners: .05, .2, .2, .05
             size_hint:0.2,1
@@ -260,9 +261,9 @@ WindowManager:
     font_size: self.width*0.1
 
     border_buff: 0.1
-    border_color: (143/255, 4/255, 71/255, 1)
+    border_color: hex("#cc241d")
 
-    bg_color: (189/255, 6/255, 94/255, 1)
+    bg_color: hex("#fb4934")
 
     foreground_color: 1, 1, 1, 1  
 
@@ -285,7 +286,7 @@ WindowManager:
     spacing: self.width*0.01
     canvas.before:
         Color: 
-            rgba: (151/255, 177/255, 199/255, 1)
+            rgba: hex('d5c4a1')
         Rectangle: 
             pos: self.pos
             size: self.size
@@ -355,9 +356,9 @@ WindowManager:
         RoundedButton:
             text: "Åben nu"
             bold: True
-            default_color: (68/255, 145/255, 68/255, 1)
-            border_color: (78,145,78,1)
-            border_buff: 0.015
+            default_color: hex('#689d6a')
+            border_color: hex('#8ec07c') 
+            border_buff: 0.05
             press_shade: [.5,.5,.5,.5]
             size_hint: (1,0.1)
             spacing: self.height*0.1
@@ -373,18 +374,17 @@ WindowManager:
             # shadow_blur_radius: self.width*0.06
             
         InputContainers:
-            border_buff: 0.01
             spacing: self.width*0.02
             padding: self.width*0.04
             size_hint: 1, 0.3
-            border_buff: 0.04
+            border_buff: 0.025
+            corner_roundness: 0.25
             # shadow_offset_x: self.width*0.021
             # shadow_offset_y: self.width*0.021
             # shadow_spread_x: self.width*0.01
             # shadow_spread_y: self.width*0.01
-            bg_color: (65/255, 90/255, 119/255, 1)
-            border_color: (119/255, 141/255, 169/255, 1)
-        
+            bg_color: hex('#83a598')       
+            border_color: hex('#458588')        
 
             BoxLayout: # Border Time/date
                 orientation: 'horizontal'
@@ -395,12 +395,12 @@ WindowManager:
                     orientation: 'horizontal'
                     spacing:self.width*0.01
                     padding: self.width*0.02
-                    bg_color: (69/255, 123/255, 157/255, 1)
+                    bg_color: hex('#458588')
                     corner_roundness: 1
 
                     CustomLabel:
                         font_size: self.width*0.3
-                        bg_color: (22/255, 138/255, 173/255, 1)
+                        bg_color: hex('#83a598')
                         corner_roundness: 1
                         text:"Tid"
                         bold: True
@@ -411,7 +411,7 @@ WindowManager:
                         bg_color: (.9,.9,1,1)
                         individual_corners: True
                         corners: [1,0,0,1]
-                        color: (0,0,0,1)
+                        color: hex('#282828')
                         input_filter: 'int'
                         input_type: "number"
                         multiline: False
@@ -434,11 +434,10 @@ WindowManager:
                 InputContainers: #Date
                     orientation: "vertical"
                     bg_color: (0,0,0)
-
                     BoxLayout:
                         orientation: "horizontal"
                         CustomLabel:
-                            bg_color: (22/255, 138/255, 173/255, 1)
+                            bg_color: hex('#458588')
                             font_size: min(self.width/4, self.height/2)
                             text: "Dag"
                             bold: True
@@ -446,14 +445,14 @@ WindowManager:
                             corners: [2,0,0,0]
 
                         CustomLabel:    
-                            bg_color: (22/255, 138/255, 173/255, 1)    
+                            bg_color: hex('#458588')
                             font_size: min(self.width/4, self.height/2)
                             text: "Måned"
                             bold: True
 
                         CustomLabel:
                             individual_corners: True
-                            bg_color: (22/255, 138/255, 173/255, 1)
+                            bg_color: hex('#458588')
                             font_size: min(self.width/4, self.height/2)
                             text: "År"
                             bold: True
@@ -499,7 +498,7 @@ WindowManager:
 
                 CustomLabel:
                     font_size: self.width*0.2
-                    bg_color: (22/255, 138/255, 173/255, 1)
+                    bg_color: hex('#458588')
                     text: "Indhold" 
                     bold: True
                     individual_corners: True
@@ -517,7 +516,7 @@ WindowManager:
                 
                 CustomLabel:
                     font_size: self.width*0.2
-                    bg_color: (22/255, 138/255, 173/255, 1)
+                    bg_color: hex('#458588')
                     text: "Kasse"
                     bold: True
                     individual_corners: True
@@ -538,9 +537,8 @@ WindowManager:
             RoundedButton:
                 size_hint: 1,0.45
                 text:"Tilføj"
-                #default_color: (252/255, 211/255, 3/255,1)
-                default_color: (68/255, 145/255, 68/255, 1)
-                border_color: (1, 1, 1, 1)
+                default_color: hex("#d79921")
+                border_color: hex("#fabd2f")
                 corner_roundness: 1
                 #border_color: (1,1,1,1)
                 press_shade: [.5,.5,.5,.5]
@@ -551,19 +549,17 @@ WindowManager:
                     root.add_event()
 
         BoxLayout: #EventHolders
-            spacing: self.width*0.02
             orientation: "vertical"
                 
             CustomLabel:
                 text:"Events:"
-                border_buff: 0.09
-                corner_roundness: .25
-                bg_color: (56/255, 147/255, 232/255,1)
-                border_color: (70/255, 97/255, 166/255, 1)
+                individual_corners: True
+                corners: [.25, .25,0,0]
+                bg_color: hex("#458588")
                 size_hint: 1, 0.1
                 bold: True
                 color: (1,1,1,1)
-                font_size:min(self.width/4, self.height/2)
+                font_size: min(self.width/4, self.height/2)
            
             ScrollView:
                 scroll_type: ['content']
@@ -573,9 +569,7 @@ WindowManager:
                     id: event_scroller
                     orientation: 'vertical'
                     spacing: self.width*0.009
-                    bg_color: (119/255, 141/255, 169/255, 1)
-                    border_color: (65/255, 90/255, 119/255, 1)
-                    static_corners: True
-                    corner: self.width*0.05
+                    bg_color: hex("#a89984")
+                    individual_corners: True
+                    corners: [0,0, .25, .25]
                     padding: self.width*0.03     
-                              
