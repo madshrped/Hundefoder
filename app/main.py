@@ -185,7 +185,7 @@ class Pop_msg(Label):
 def show_popup(
     _title: str, _text: str = None, sizehint: tuple = (0.75, 0.2), content=None
 ):
-    _content = Pop_msg(text=_text) if not content else content
+    _content = Pop_msg(text=_text, markup=True) if not content else content
     new = Popup(title=_title, content=_content, size_hint=sizehint)
     new.open()
 
@@ -358,8 +358,8 @@ class MainWindow(Screen):
                     else ""
                 )
                 show_popup(
-                    "Aktivering",
-                    f"Aktiverer...\nÅbner for dispenser {self.events[i].dispenser}\n{content}",
+                    "Åbner",
+                    f"[b]Dispenser[/b]: {self.events[i].dispenser}\n{content}",
                 )
         self.events = [e for e in self.events if not self.check_event_relevant(e)]
         self.events = self.sort_events(self.events)
