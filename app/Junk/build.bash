@@ -1,0 +1,18 @@
+p4a --verbose apk \
+  --private . \
+  --package=DoggiDispenserV4 \
+  --name "DoggiDispenser" \
+  --version 2 \
+  --bootstrap=sdl2 \
+  --requirements=python3,kivy,pygments \
+  --arch=arm64-v8a \
+  --icon assets/icon.png \
+  --presplash assets/presplash.png \
+  --presplash-color=#FFD5C4A1 \
+  --permission=INTERNET \
+  --orientation=portrait,portrait-reverse \
+  --android-api 33 \
+  --ndk-api 25 \
+  --sdk-dir "$ANDROIDSDK" \
+  --ndk-dir "$ANDROIDNDK" \
+  --debug

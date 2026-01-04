@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Doggi Dispencer
+title = DoggiDispencer
 
 # (str) Package name
-package.name = DoggiDispencerV3
+package.name = DoggiDispencerV4
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.1
+version = 4
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -44,10 +44,10 @@ requirements = python3, kivy, datetime, pygments
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = Nellie.png
+presplash.filename = assets/presplash.png
 
 # (str) Icon of the application
-icon.filename = Nellie_logo.png
+icon.filename = assets/icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
@@ -81,8 +81,7 @@ fullscreen = 0
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-android.presplash_color = #FFF7EF
-
+android.presplash_color = #D5C4A1
 # (string) Presplash animation using Lottie format.
 # see https://lottiefiles.com/ for examples and https://airbnb.design/lottie/
 # for general documentation.
@@ -110,7 +109,7 @@ android.permissions = INTERNET,
 #android.sdk = 20
 
 # (str) Android NDK version to use
-#android.ndk = 23b
+#android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -119,10 +118,10 @@ android.permissions = INTERNET,
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+android.ndk_path = /nix/store/z2wlka40pv1zw9kv04cx2dwjkd9pky22-android-sdk-ndk-29.0.14206865
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+android.sdk_path = /nix/store/g4yk7vj2fk7jl7bfwgqj0mhk17m5pf88-androidsdk-tools/libexec/android-sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =

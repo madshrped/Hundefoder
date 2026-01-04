@@ -1,5 +1,6 @@
 {
-  pkgs ? import <nixpkgs> { },
+  pkgs ? import <nixpkgs> {
+  },
 }:
 
 pkgs.mkShell {
@@ -10,7 +11,6 @@ pkgs.mkShell {
         pip
         pillow
         kivy
-        firebase-tools
       ]
     ))
     SDL2
